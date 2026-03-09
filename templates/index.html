@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>idea-turbo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css?v=20260309a" />
+</head>
+<body>
+  <div class="grain"></div>
+  <section id="start-screen" class="start-screen">
+    <div class="start-card">
+      <p class="start-kicker">idea-turbo</p>
+      <h2>新規入力 or 既存の継続</h2>
+      <p>新規で開始するか、保存済みのブレストを再開できます。</p>
+
+      <div class="mode-tabs" role="tablist" aria-label="開始モード">
+        <button id="tab-new" class="mode-tab active" type="button" role="tab" aria-selected="true">新規入力</button>
+        <button id="tab-continue" class="mode-tab" type="button" role="tab" aria-selected="false">既存の継続</button>
+      </div>
+
+      <form id="title-form" class="mode-panel" autocomplete="off">
+        <input id="title-input" type="text" placeholder="例: 学園祭を盛り上げる新企画" required />
+        <button type="submit">開始</button>
+      </form>
+
+      <section id="continue-panel" class="mode-panel hidden" aria-live="polite">
+        <p class="history-head">保存済みの履歴一覧</p>
+        <div id="history-list" class="history-list"></div>
+      </section>
+    </div>
+  </section>
+
+  <main id="app-shell" class="container hidden">
+    <header class="header">
+      <div class="badge">MODEL: {{ model_name }}</div>
+      <a id="back-link" class="back-link" href="#">画面1に戻る</a>
+      <h1 id="session-title">タイトルを入力してください</h1>
+      <p class="desc">ひらめきを投げるたび、AIが全力で褒めます。</p>
+    </header>
+
+    <section id="chat" class="chat" aria-live="polite"></section>
+
+    <form id="idea-form" class="idea-form" autocomplete="off">
+      <textarea id="idea-input" placeholder="思いついたアイデアを書いて Enter で送信（Shift+Enterで改行）" rows="3" required></textarea>
+      <button type="submit">送信</button>
+    </form>
+  </main>
+
+  <div id="sakura-layer" class="sakura-layer" aria-hidden="true"></div>
+
+  <script>
+    window.APP_CONFIG = {
+      idleSeconds: {{ idle_seconds }}
+    };
+  </script>
+  <script src="/static/script.js?v=20260309a"></script>
+</body>
+</html>
